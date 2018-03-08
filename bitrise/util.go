@@ -3,21 +3,19 @@ package bitrise
 import (
 	"encoding/json"
 	"os"
-
-	"github.com/bitrise-io/bitrise-cli/models"
 )
 
-func ReadWorkFlowJson(pth string) (models.WorkFlowModel, error) {
-	var workflow models.WorkFlowModel
+func ReadWorkFlowJson(pth string) (WorkFlowJsonStruct, error) {
+	var workflow WorkFlowJsonStruct
 
 	file, err := os.Open(pth)
 	if err != nil {
-		return models.WorkFlowModel{}, err
+		return WorkFlowJsonStruct{}, err
 	}
 
 	parser := json.NewDecoder(file)
 	if err = parser.Decode(&workflow); err != nil {
-		return models.WorkFlowModel{}, err
+		return WorkFlowJsonStruct{}, err
 	}
 
 	return workflow, nil
